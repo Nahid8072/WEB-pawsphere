@@ -142,7 +142,8 @@ The current version focuses on delivering a **polished front-end prototype** wit
 
 ## 📁 Project Structure
 
-<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="PawSphere/
+```text
+PawSphere/
 ├── src/
 │   ├── app/
 │   │   └── App.tsx
@@ -158,7 +159,7 @@ The current version focuses on delivering a **polished front-end prototype** wit
 ├── vite.config.ts
 ├── postcss.config.mjs
 └── __figma__entrypoint__.ts
-"/>
+```
 
 > **Note:** Most application screens and prototype logic are intentionally consolidated inside `src/app/App.tsx`.
 
@@ -168,7 +169,8 @@ The current version focuses on delivering a **polished front-end prototype** wit
 
 PawSphere currently follows a **front-end-only role-based architecture**.
 
-<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="User
+```text
+User
 ├── Guest / Public Visitor
 │   ├── Landing Page
 │   ├── Browse Pets
@@ -180,13 +182,18 @@ PawSphere currently follows a **front-end-only role-based architecture**.
     ├── Shelter Portal
     ├── Veterinarian Portal
     └── Administrator Portal
-"/>
+```
 
 ---
 
 ## 🔄 Current Application Flow
 
-<List gap={2}><List.Item>Visitor lands on the public homepage.</List.Item><List.Item>Browses pets and opens pet detail pages.</List.Item><List.Item>Selects a demo role from the login screen.</List.Item><List.Item>Receives a welcome modal after login.</List.Item><List.Item>Enters a role-specific dashboard and navigation experience.</List.Item><List.Item>All screens use local mock data and local UI state updates.</List.Item></List>
+1. Visitor lands on the public homepage.
+2. Browses pets and opens pet detail pages.
+3. Selects a demo role from the login screen.
+4. Receives a welcome modal after login.
+5. Enters a role-specific dashboard and navigation experience.
+6. All screens use local mock data and local UI state updates.
 
 ---
 
@@ -194,45 +201,57 @@ PawSphere currently follows a **front-end-only role-based architecture**.
 
 ### Prerequisites
 
+Install the following before running the project locally:
+
 - Node.js 18 or later
 - pnpm
 
-Check versions:
+Check installed versions:
 
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="node --version
+```bash
+node --version
 pnpm --version
-"/>
+```
 
-Install pnpm if needed:
+Install pnpm globally if needed:
 
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="npm install -g pnpm
-"/>
+```bash
+npm install -g pnpm
+```
 
 ---
 
 ### Installation
 
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm install
-"/>
+Clone or download the project, then install dependencies:
+
+```bash
+pnpm install
+```
 
 ---
 
 ### Run Locally
 
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm dev
-"/>
+Start the development server:
+
+```bash
+pnpm dev
+```
 
 Open:
 
-<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="http://localhost:5173
-"/>
+```text
+http://localhost:5173
+```
 
 ---
 
 ### Build for Production
 
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm build
-"/>
+```bash
+pnpm build
+```
 
 > **Note:** This workspace is currently configured for **Figma Make** and uses `__figma__entrypoint__.ts`. A standard standalone Vite deployment may require an `index.html` entry file.
 
@@ -255,7 +274,8 @@ PawSphere follows a **minimal, trustworthy health-and-care SaaS design language*
 
 ### Core Colors
 
-<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="Primary Green:      #16A34A
+```text
+Primary Green:      #16A34A
 Dark Green:         #15803D
 Light Green:        #DCFCE7
 Soft Green Surface: #F0FDF4
@@ -263,7 +283,7 @@ Page Background:    #F8FAFC
 Primary Text:       #111827
 Secondary Text:     #6B7280
 Border:             #E5E7EB
-"/>
+```
 
 ---
 
@@ -333,11 +353,12 @@ All users, pets, appointments, messages, records, documents, and reports are cur
 
 The sign-in screen currently supports demo access for:
 
-<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="Pet Owner
+```text
+Pet Owner
 Shelter
 Veterinarian
 Administrator
-"/>
+```
 
 Each role opens a different dashboard and navigation experience.
 
@@ -363,4 +384,3 @@ The current build demonstrates the **complete user experience, role-based naviga
 ## 📄 License
 
 This project is currently intended for **educational, prototype, and portfolio purposes**.
-  
