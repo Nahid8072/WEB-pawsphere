@@ -1,31 +1,36 @@
 
   # WEB project from 262
 
-# 🐾 PawSphere — Pet Adoption & Veterinary Care Platform
+# 🐾 PawSphere
 
-PawSphere is a modern, user-friendly platform designed to simplify pet adoption and veterinary care in Bangladesh. It connects pet owners, animal shelters, veterinarians, and platform administrators through a unified and organized experience.
+### Pet Adoption & Veterinary Care Platform
 
-This project is currently focused on delivering a polished front-end prototype featuring role-based dashboards, realistic mock data, interactive UI states, adoption workflows, and veterinary appointment management.
+PawSphere is a modern, user-friendly platform designed to simplify **pet adoption and veterinary care in Bangladesh**. It brings together **pet owners, animal shelters, veterinarians, and platform administrators** into one organized digital experience.
+
+The current version focuses on delivering a **polished front-end prototype** with role-based dashboards, realistic mock data, interactive UI states, adoption workflows, and veterinary appointment management.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
 ### 🌐 Public Experience
 
 - Landing page introducing PawSphere
 - Browse and search pets
 - Filter pets by species (dogs and cats)
-- Detailed pet profiles with:
-  - Image gallery carousel
-  - Personality tags
-  - Lifestyle tags
-  - Health notes
-  - Vaccination status
-  - Shelter information
-  - Verified shelter badges
-- Save or favorite pets
-- Sign in and registration screens
+- Detailed pet profile pages
+- Favorite / save pet interactions
+- Public sign-in and registration screens
+
+#### Pet Profile Includes
+
+- Image gallery carousel
+- Personality tags
+- Lifestyle tags
+- Health notes
+- Vaccination status
+- Shelter information
+- Verified shelter badges
 
 ---
 
@@ -36,11 +41,11 @@ This project is currently focused on delivering a polished front-end prototype f
 - Upcoming appointment reminders
 - Browse pets and manage favorites
 - Track adoption applications
-- View pet health and vaccination records
+- Pet health and vaccination records
 - Appointment history and cancellation flow
 - Search veterinarians and book appointments
 - Messages and notifications
-- Downloadable pet documents, certificates, and adoption agreements
+- Downloadable pet documents and adoption agreements
 
 #### Friendly Empty States
 
@@ -56,12 +61,12 @@ This project is currently focused on delivering a polished front-end prototype f
 ### 🏠 Shelter Portal
 
 - Shelter dashboard
-- Manage pet listings
-- Add new pets
-- Review adoption applications
-- Schedule meet-and-greets
-- Generate adoption certificates
-- View reports and analytics with charts
+- Pet listing management
+- Add-pet workflow
+- Adoption application review
+- Meet-and-greet scheduling
+- Adoption certificates
+- Reports and analytics
 - Quick actions and status tracking
 
 ---
@@ -70,7 +75,7 @@ This project is currently focused on delivering a polished front-end prototype f
 
 - Veterinarian dashboard
 - Appointment management
-- Patient record management
+- Patient records
 - Prescriptions
 - Medical history
 - Messaging
@@ -82,7 +87,7 @@ This project is currently focused on delivering a polished front-end prototype f
 
 - Platform dashboard
 - User management
-- Shelter and veterinarian verification workflows
+- Shelter and veterinarian verification
 - Adoption monitoring
 - Pet listing moderation
 - Broadcast management
@@ -94,13 +99,13 @@ This project is currently focused on delivering a polished front-end prototype f
 ## 🎨 UX & UI Enhancements
 
 - First-login welcome modal for each role
-- Success toast notifications for important actions
+- Success toast notifications
 - Loading skeletons for pet browsing
 - Subtle hover, shadow, and elevation animations
-- Helpful empty states with next-step guidance
+- Clean empty states with helpful guidance
 - Verified badges for shelters and veterinarians
 - Responsive layouts for smaller screens
-- Unique chart IDs to avoid Recharts duplicate-key warnings
+- Unique chart IDs to prevent Recharts duplicate-key warnings
 
 ---
 
@@ -155,19 +160,19 @@ This project is currently focused on delivering a polished front-end prototype f
 └── __figma__entrypoint__.ts
 "/>
 
-> **Note:** Most application screens and logic are intentionally consolidated inside `src/app/App.tsx` for this prototype version.
+> **Note:** Most application screens and prototype logic are intentionally consolidated inside `src/app/App.tsx`.
 
 ---
 
 ## 🏗️ System Architecture
 
-PawSphere currently uses a **front-end-only role-based architecture**.
+PawSphere currently follows a **front-end-only role-based architecture**.
 
 <Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="User
 ├── Guest / Public Visitor
-│   ├── Landing page
-│   ├── Browse pets
-│   ├── Pet details
+│   ├── Landing Page
+│   ├── Browse Pets
+│   ├── Pet Details
 │   └── Authentication
 │
 └── Authenticated User
@@ -181,83 +186,55 @@ PawSphere currently uses a **front-end-only role-based architecture**.
 
 ## 🔄 Current Application Flow
 
-<List gap={2}><List.Item>Visitor lands on the public homepage.</List.Item><List.Item>Browses pets and opens pet detail pages.</List.Item><List.Item>Uses the login screen to access a demo role.</List.Item><List.Item>Receives a welcome modal after login.</List.Item><List.Item>Enters a role-specific dashboard and navigation experience.</List.Item><List.Item>All screens use local mock data and local UI state updates.</List.Item></List>
+<List gap={2}><List.Item>Visitor lands on the public homepage.</List.Item><List.Item>Browses pets and opens pet detail pages.</List.Item><List.Item>Selects a demo role from the login screen.</List.Item><List.Item>Receives a welcome modal after login.</List.Item><List.Item>Enters a role-specific dashboard and navigation experience.</List.Item><List.Item>All screens use local mock data and local UI state updates.</List.Item></List>
 
 ---
 
-## 📋 Prerequisites
+## 🚀 Getting Started
 
-Install the following before running the project locally:
+### Prerequisites
 
-- **Node.js 18+**
-- **pnpm**
+- Node.js 18 or later
+- pnpm
 
-Check installed versions:
+Check versions:
 
 <Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="node --version
 pnpm --version
 "/>
 
-Install pnpm globally if needed:
+Install pnpm if needed:
 
 <Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="npm install -g pnpm
 "/>
 
 ---
 
-## ⚙️ Installation
-
-Clone or download the project, then install dependencies:
+### Installation
 
 <Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm install
 "/>
 
 ---
 
-## ▶️ Run Locally
-
-Start the development server:
+### Run Locally
 
 <Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm dev
 "/>
 
-If using the direct Vite command:
-
-<Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm vite
-"/>
-
-Open the local URL shown in the terminal (commonly):
+Open:
 
 <Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="http://localhost:5173
 "/>
 
 ---
 
-## 📦 Build for Production
-
-Create a production build:
+### Build for Production
 
 <Code value="bash"/><CodeBlock language="bash" editable={true} interactive={true} content="pnpm build
 "/>
 
 > **Note:** This workspace is currently configured for **Figma Make** and uses `__figma__entrypoint__.ts`. A standard standalone Vite deployment may require an `index.html` entry file.
-
----
-
-## 📚 Main Dependencies
-
-- react
-- react-dom
-- typescript
-- vite
-- tailwindcss
-- lucide-react
-- recharts
-- motion
-- sonner
-- date-fns
-- @radix-ui/*
-- embla-carousel-react
 
 ---
 
@@ -311,16 +288,16 @@ All users, pets, appointments, messages, records, documents, and reports are cur
 
 ---
 
-## 🚀 Suggested Future Improvements
+## 🚧 Future Improvements
 
 ### Backend & Authentication
 
 - Secure authentication for each role
 - Database integration
 - Role-based access control
-- Persistent pet listings, applications, and appointments
+- Persistent pet listings and appointments
 
-### Pet Adoption Workflow
+### Adoption Workflow
 
 - Real application forms
 - Status updates
@@ -356,12 +333,21 @@ All users, pets, appointments, messages, records, documents, and reports are cur
 
 The sign-in screen currently supports demo access for:
 
-- Pet Owner
-- Shelter
-- Veterinarian
-- Administrator
+<Code value="text"/><CodeBlock language="text" editable={false} interactive={false} content="Pet Owner
+Shelter
+Veterinarian
+Administrator
+"/>
 
 Each role opens a different dashboard and navigation experience.
+
+---
+
+## 📊 Project Status
+
+> **Status:** Front-end prototype in active development
+
+The current build demonstrates the **complete user experience, role-based navigation, adoption workflow, and veterinary care flow** using realistic mock data and interactive UI behavior.
 
 ---
 
@@ -374,7 +360,7 @@ Each role opens a different dashboard and navigation experience.
 
 ---
 
-## 📌 Status
+## 📄 License
 
-PawSphere is currently in the **front-end prototype stage**. The project demonstrates the complete user experience, role-based navigation, and core adoption and veterinary workflows, while backend services and real-world integrations are planned for future development.
+This project is currently intended for **educational, prototype, and portfolio purposes**.
   
