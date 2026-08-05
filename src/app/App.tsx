@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   Phone,
+  Video,
   Mail,
   Instagram,
   Twitter,
@@ -57,6 +58,14 @@ import {
   Sparkles,
   ChevronRight,
   Image as ImageIcon,
+  FileCheck2,
+  ShieldCheck,
+  MailCheck,
+  Trash,
+  Printer,
+  LifeBuoy,
+  FileDown,
+  Frown,
 } from "lucide-react";
 import {
   AreaChart,
@@ -1114,7 +1123,80 @@ function ReminderWidget() {
 }
 
 function LoadingCards() {
-  return <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">{[1, 2, 3].map((i) => <div key={i} className="overflow-hidden rounded-[14px] border border-[#E5E7EB] bg-white"><div className="h-44 animate-pulse bg-[#EAF3EC]" /><div className="space-y-3 p-4"><div className="h-4 w-2/5 animate-pulse rounded bg-[#E5E7EB]" /><div className="h-3 w-3/4 animate-pulse rounded bg-[#F1F5F9]" /><div className="h-3 w-1/2 animate-pulse rounded bg-[#F1F5F9]" /></div></div>)}</div>;
+  return <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">{[1, 2, 3].map((i) => <div key={i} className="overflow-hidden rounded-[18px] border border-[#E5E7EB] bg-white"><Skeleton className="h-44 rounded-none" /><div className="space-y-3 p-4"><Skeleton className="h-4 w-2/5" /><Skeleton className="h-3 w-3/4" /><Skeleton className="h-3 w-1/2" /></div></div>)}</div>;
+}
+
+function Skeleton({ className = "" }: { className?: string }) {
+  return <div className={`animate-pulse rounded-lg bg-gradient-to-r from-[#F1F5F9] via-[#EAF3EC] to-[#F1F5F9] bg-[length:200%_100%] ${className}`} />;
+}
+
+function DashboardCardSkeletons() {
+  return <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">{[1, 2, 3, 4].map((item) => <div key={item} className="rounded-[18px] border border-[#E5E7EB] bg-white p-5"><Skeleton className="h-9 w-9" /><Skeleton className="mt-4 h-6 w-16" /><Skeleton className="mt-2 h-3 w-24" /></div>)}</div>;
+}
+
+function TableSkeleton({ rows = 4 }: { rows?: number }) {
+  return <div className="overflow-hidden rounded-[18px] border border-[#E5E7EB] bg-white p-5"><Skeleton className="h-4 w-1/3" />{Array.from({ length: rows }, (_, index) => <div key={index} className="mt-5 grid grid-cols-4 gap-4"><Skeleton className="h-4" /><Skeleton className="h-4" /><Skeleton className="h-4" /><Skeleton className="h-4" /></div>)}</div>;
+}
+
+function ChatListSkeleton() {
+  return <div className="space-y-4 rounded-[18px] border border-[#E5E7EB] bg-white p-5">{[1, 2, 3, 4].map((item) => <div key={item} className="flex gap-3"><Skeleton className="h-10 w-10 shrink-0 rounded-full" /><div className="flex-1 space-y-2"><Skeleton className="h-3 w-1/3" /><Skeleton className="h-3 w-3/4" /></div></div>)}</div>;
+}
+
+function FormSkeleton() {
+  return <div className="space-y-4 rounded-[18px] border border-[#E5E7EB] bg-white p-6">{[1, 2, 3].map((item) => <div key={item}><Skeleton className="mb-2 h-3 w-24" /><Skeleton className="h-11 w-full" /></div>)}<Skeleton className="h-11 w-32" /></div>;
+}
+
+function ConfirmationDialog({
+  open,
+  title,
+  description,
+  confirmLabel,
+  onCancel,
+  onConfirm,
+}: {
+  open: boolean;
+  title: string;
+  description: string;
+  confirmLabel: string;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  if (!open) return null;
+  return <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[#111827]/40 p-4 backdrop-blur-sm"><div role="dialog" aria-modal="true" className="w-full max-w-sm rounded-[18px] bg-white p-6 shadow-2xl shadow-slate-900/15"><div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-50 text-red-500"><AlertCircle size={20} /></div><h2 className="mt-4 text-lg font-bold text-[#111827]">{title}</h2><p className="mt-2 text-sm leading-6 text-[#6B7280]">{description}</p><div className="mt-6 flex gap-3"><button onClick={onCancel} className="flex-1 rounded-[14px] border border-[#E5E7EB] py-2.5 text-sm font-semibold text-[#374151] hover:bg-[#F8FAFC]">Keep it</button><button onClick={onConfirm} className="flex-1 rounded-[14px] bg-red-500 py-2.5 text-sm font-semibold text-white hover:bg-red-600">{confirmLabel}</button></div></div></div>;
+}
+
+function Breadcrumbs({ items }: { items: string[] }) {
+  return <nav aria-label="Breadcrumb" className="mb-5 flex items-center gap-1.5 text-xs font-medium text-[#6B7280]">{items.map((item, index) => <span key={`${item}-${index}`} className="flex items-center gap-1.5">{index > 0 && <ChevronRight size={13} className="text-[#9CA3AF]" />}<span className={index === items.length - 1 ? "text-[#111827]" : ""}>{item}</span></span>)}</nav>;
+}
+
+function DocumentPreviewModal({ open, title, onClose }: { open: boolean; title: string; onClose: () => void }) {
+  if (!open) return null;
+  return <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[#111827]/40 p-4 backdrop-blur-sm"><div role="dialog" aria-modal="true" className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-[18px] bg-white shadow-2xl shadow-slate-900/15"><div className="flex items-center justify-between border-b border-[#E5E7EB] px-6 py-4"><div><p className="text-sm font-semibold text-[#111827]">{title}</p><p className="mt-0.5 text-xs text-[#6B7280]">Document preview</p></div><button onClick={onClose} aria-label="Close preview" className="rounded-[10px] p-2 text-[#6B7280] hover:bg-[#F8FAFC]"><X size={18} /></button></div><div className="m-6 flex min-h-[320px] flex-1 items-center justify-center rounded-[14px] border border-dashed border-[#D1D5DB] bg-[#F8FAFC]"><div className="text-center"><FileText size={36} className="mx-auto text-[#16A34A]" /><p className="mt-3 text-sm font-semibold text-[#374151]">PDF preview</p><p className="mt-1 text-xs text-[#9CA3AF]">A secure preview would appear here.</p></div></div><div className="flex flex-wrap justify-end gap-3 border-t border-[#E5E7EB] px-6 py-4"><button onClick={onClose} className="rounded-[14px] border border-[#E5E7EB] px-4 py-2.5 text-sm font-semibold text-[#374151] hover:bg-[#F8FAFC]">Close</button><button className="flex items-center gap-2 rounded-[14px] border border-[#16A34A] px-4 py-2.5 text-sm font-semibold text-[#15803D] hover:bg-[#F0FDF4]"><Printer size={15} /> Print</button><button className="flex items-center gap-2 rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#15803D]"><FileDown size={15} /> Download</button></div></div></div>;
+}
+
+function ErrorPage({ code, title, message, onHome }: { code: "403" | "404" | "500"; title: string; message: string; onHome: () => void }) {
+  return <div className="flex min-h-screen items-center justify-center bg-[#F8FAFC] p-6"><div className="max-w-md text-center"><div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-[#F0FDF4] text-[#16A34A]"><PawPrint size={38} /></div><p className="mt-7 text-sm font-bold tracking-[0.2em] text-[#16A34A]">ERROR {code}</p><h1 className="mt-3 text-3xl font-bold tracking-[-0.02em] text-[#111827]">{title}</h1><p className="mt-3 text-sm leading-6 text-[#6B7280]">{message}</p><div className="mt-7 flex justify-center gap-3"><button onClick={onHome} className="rounded-[14px] bg-[#16A34A] px-5 py-3 text-sm font-semibold text-white hover:bg-[#15803D]">Back to home</button><button onClick={() => window.location.reload()} className="rounded-[14px] border border-[#E5E7EB] px-5 py-3 text-sm font-semibold text-[#374151] hover:bg-white">Try again</button></div></div></div>;
+}
+
+function AuthShell({ children }: { children: React.ReactNode }) {
+  return <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4"><div className="w-full max-w-sm rounded-[18px] border border-[#E5E7EB] bg-white p-8 shadow-[0_12px_32px_rgba(15,23,42,0.06)]">{children}</div></div>;
+}
+
+function RegistrationSuccessScreen({ role, onContinue }: { role: Role; onContinue: () => void }) {
+  return <AuthShell><div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]"><CheckCircle size={28} /></div><p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-[#16A34A]">Account created</p><h1 className="mt-2 text-2xl font-bold text-[#111827]">Welcome to PawSphere</h1><p className="mt-3 text-sm leading-6 text-[#6B7280]">Your {roleLabels[role]} account has been created successfully. {role === "shelter" || role === "vet" ? "One final verification step is required before access." : "You can now sign in and start exploring."}</p><button onClick={onContinue} className="mt-7 w-full rounded-[14px] bg-[#16A34A] py-3 text-sm font-semibold text-white hover:bg-[#15803D]">{role === "shelter" || role === "vet" ? "View verification status" : "Go to Sign In"}</button></AuthShell>;
+}
+
+function VerificationPendingScreen({ role, onLogout }: { role: "shelter" | "vet"; onLogout: () => void }) {
+  const documents = role === "shelter" ? ["Shelter registration certificate", "Director identity document"] : ["Veterinary license", "Professional identity document"];
+  return <AuthShell><div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F0FDF4] text-[#16A34A]"><ShieldCheck size={27} /></div><p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-[#16A34A]">Verification in progress</p><h1 className="mt-2 text-2xl font-bold text-[#111827]">We’re reviewing your account</h1><p className="mt-3 text-sm leading-6 text-[#6B7280]">Your {roleLabels[role].toLowerCase()} profile is pending admin approval. We’ll notify you once it’s ready.</p><div className="mt-6 rounded-[14px] border border-[#E5E7EB] bg-[#F8FAFC] p-4"><div className="flex items-center justify-between"><p className="text-sm font-semibold text-[#111827]">Submitted documents</p><Badge status="Pending" /></div><div className="mt-3 space-y-2">{documents.map((document) => <div key={document} className="flex items-center gap-2 text-xs text-[#6B7280]"><FileCheck2 size={14} className="text-[#16A34A]" /> {document}</div>)}</div></div><p className="mt-4 text-xs text-[#6B7280]"><Clock className="mr-1 inline text-[#16A34A]" size={14} />Estimated review time: 1–2 business days</p><button className="mt-6 w-full rounded-[14px] border border-[#16A34A] py-2.5 text-sm font-semibold text-[#15803D] hover:bg-[#F0FDF4]">Contact support</button><button onClick={onLogout} className="mt-3 w-full py-2 text-sm font-semibold text-[#6B7280] hover:text-[#111827]">Log out</button></AuthShell>;
+}
+
+function ForgotPasswordScreen({ navigate }: { navigate: (view: string) => void }) {
+  return <AuthShell><button onClick={() => navigate("login")} className="text-sm font-semibold text-[#6B7280] hover:text-[#111827]">← Back to sign in</button><h1 className="mt-7 text-2xl font-bold text-[#111827]">Reset your password</h1><p className="mt-2 text-sm leading-6 text-[#6B7280]">Enter your email and we’ll send a password reset link.</p><input type="email" placeholder="Email address" className="mt-6 w-full rounded-[14px] border border-[#E5E7EB] px-3 py-3 text-sm outline-none focus:border-[#16A34A]" /><button onClick={() => navigate("reset-sent")} className="mt-4 w-full rounded-[14px] bg-[#16A34A] py-3 text-sm font-semibold text-white hover:bg-[#15803D]">Send reset link</button></AuthShell>;
+}
+
+function ResetSentScreen({ navigate }: { navigate: (view: string) => void }) {
+  return <AuthShell><div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]"><MailCheck size={27} /></div><h1 className="mt-6 text-2xl font-bold text-[#111827]">Check your inbox</h1><p className="mt-3 text-sm leading-6 text-[#6B7280]">If an account exists for that email, we’ve sent a reset link. This is a frontend-only demo, so no email will be delivered.</p><button onClick={() => navigate("login")} className="mt-7 w-full rounded-[14px] bg-[#16A34A] py-3 text-sm font-semibold text-white hover:bg-[#15803D]">Back to Sign In</button></AuthShell>;
 }
 
 // ── DASHBOARD LAYOUT ─────────────────────────────────────────────────────────
@@ -1132,12 +1214,13 @@ function DashboardLayout({
   setRole: (r: Role) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const navItems = NAV[role] || [];
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] overflow-hidden">
       <aside
-        className={`${collapsed ? "w-[60px]" : "w-[240px]"} flex-shrink-0 bg-white border-r border-[#E5E7EB] flex flex-col transition-all duration-200`}
+        className={`${collapsed ? "w-[60px]" : "w-[240px] max-lg:w-[64px]"} flex-shrink-0 bg-white border-r border-[#E5E7EB] flex flex-col transition-all duration-200`}
       >
         <div className="h-[68px] flex items-center px-4 border-b border-[#E5E7EB] gap-2.5">
           <div className="w-7 h-7 bg-[#16A34A] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -1146,7 +1229,7 @@ function DashboardLayout({
             </span>
           </div>
           {!collapsed && (
-            <span className="font-semibold text-[#111827]">
+            <span className="font-semibold text-[#111827] max-lg:hidden">
               PawSphere
             </span>
           )}
@@ -1163,7 +1246,7 @@ function DashboardLayout({
                 <span className="flex-shrink-0">
                   {item.icon}
                 </span>
-                {!collapsed && <span>{item.label}</span>}
+                {!collapsed && <span className="max-lg:hidden">{item.label}</span>}
               </button>
             );
           })}
@@ -1226,15 +1309,10 @@ function DashboardLayout({
             >
               <MessageSquare size={16} />
             </button>
-            <div
-              className="w-8 h-8 bg-[#16A34A] rounded-full flex items-center justify-center text-white text-[11px] font-bold ml-2 cursor-pointer"
-              onClick={() => setView("settings")}
-            >
-              {roleAvatars[role]}
-            </div>
+            <div className="relative ml-2"><button onClick={() => setProfileOpen((open) => !open)} aria-expanded={profileOpen} className="flex h-9 w-9 items-center justify-center rounded-full bg-[#16A34A] text-[11px] font-bold text-white ring-offset-2 transition hover:ring-2 hover:ring-[#BBF7D0]">{roleAvatars[role]}</button>{profileOpen && <div className="absolute right-0 top-11 z-40 w-48 rounded-[14px] border border-[#E5E7EB] bg-white p-1.5 shadow-xl shadow-slate-900/10"><div className="border-b border-[#F1F5F9] px-3 py-2"><p className="text-xs font-semibold text-[#111827]">{roleNames[role]}</p><p className="text-[10px] text-[#9CA3AF]">{roleLabels[role]}</p></div><button onClick={() => { setView("settings"); setProfileOpen(false); }} className="mt-1 flex w-full items-center gap-2 rounded-[9px] px-3 py-2 text-left text-xs font-medium text-[#374151] hover:bg-[#F8FAFC]"><User size={14} /> My Profile</button><button onClick={() => { setView("settings"); setProfileOpen(false); }} className="flex w-full items-center gap-2 rounded-[9px] px-3 py-2 text-left text-xs font-medium text-[#374151] hover:bg-[#F8FAFC]"><Settings size={14} /> Settings</button><button onClick={() => { setView(role === "owner" ? "guide" : "settings"); setProfileOpen(false); }} className="flex w-full items-center gap-2 rounded-[9px] px-3 py-2 text-left text-xs font-medium text-[#374151] hover:bg-[#F8FAFC]"><LifeBuoy size={14} /> Help</button><button onClick={() => { setRole("guest"); setView("landing"); }} className="mt-1 flex w-full items-center gap-2 rounded-[9px] px-3 py-2 text-left text-xs font-medium text-red-500 hover:bg-red-50"><LogOut size={14} /> Logout</button></div>}</div>
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
           {children}
         </main>
       </div>
@@ -1279,6 +1357,7 @@ function LoginScreen({
             className="w-full border border-[#E5E7EB] rounded-[10px] px-3 py-2.5 text-sm outline-none focus:border-[#16A34A] transition-colors"
           />
         </div>
+        <button onClick={() => navigate("forgot-password")} className="-mt-3 mb-5 text-xs font-semibold text-[#16A34A] hover:text-[#15803D]">Forgot password?</button>
         <div className="mb-5">
           <p className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider mb-2">
             Demo — sign in as
@@ -1323,8 +1402,11 @@ function RegisterScreen({
   navigate: (view: string, role?: Role) => void;
 }) {
   const [step, setStep] = useState(1);
-  const [selectedRole, setSelectedRole] =
-    useState<Role>("owner");
+  const [selectedRole, setSelectedRole] = useState<Role>("owner");
+  const [completed, setCompleted] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
+  if (showVerification && (selectedRole === "shelter" || selectedRole === "vet")) return <VerificationPendingScreen role={selectedRole} onLogout={() => navigate("login")} />;
+  if (completed) return <RegistrationSuccessScreen role={selectedRole} onContinue={() => selectedRole === "shelter" || selectedRole === "vet" ? setShowVerification(true) : navigate("login")} />;
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
       <div className="w-full max-w-sm bg-white border border-[#E5E7EB] rounded-[18px] p-8 shadow-sm">
@@ -1424,9 +1506,7 @@ function RegisterScreen({
               />
             </div>
             <button
-              onClick={() =>
-                navigate("dashboard", selectedRole)
-              }
+              onClick={() => setCompleted(true)}
               className="w-full bg-[#16A34A] text-white text-sm font-medium py-2.5 rounded-[10px] hover:bg-[#15803D] transition-colors mb-3"
             >
               Create Account
@@ -1621,6 +1701,7 @@ function PetDetailScreen({
   const [activeImage, setActiveImage] = useState(0);
   return (
     <div className="max-w-4xl">
+      <Breadcrumbs items={["Browse Pets", pet.name]} />
       <button
         onClick={() => navigate("browse-pets")}
         className="flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-[#111827] mb-6 transition-colors"
@@ -1720,6 +1801,7 @@ function MessagesScreen() {
   const [selected, setSelected] = useState(0);
   const [input, setInput] = useState("");
   const [chats, setChats] = useState(MESSAGES_DATA);
+  const [callNotice, setCallNotice] = useState("");
   const conv = chats[selected];
 
   const send = () => {
@@ -1748,7 +1830,7 @@ function MessagesScreen() {
   return (
     <div>
       <PageTitle title="Messages" />
-      {chats.length === 0 ? <EmptyState title="Your inbox is calm" text="When a shelter or veterinarian replies, the conversation will appear here." icon={MessageSquare} /> : <div className="flex bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden h-[600px]">
+      {chats.length === 0 ? <EmptyState title="Your inbox is calm" text="When a shelter or veterinarian replies, the conversation will appear here." icon={MessageSquare} action={<button className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">Browse pets</button>} /> : <div className="flex bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden h-[600px]">
         <div className="w-72 border-r border-[#E5E7EB] flex flex-col">
           <div className="p-3 border-b border-[#E5E7EB]">
             <div className="flex items-center gap-2 bg-[#F8FAFC] rounded-[8px] px-3 py-2">
@@ -1792,17 +1874,15 @@ function MessagesScreen() {
           </div>
         </div>
         <div className="flex-1 flex flex-col">
-          <div className="h-14 border-b border-[#E5E7EB] flex items-center px-5 gap-3">
-            <div className="w-8 h-8 bg-[#16A34A] rounded-full flex items-center justify-center text-white text-[11px] font-bold">
-              {conv.avatar}
+          <div className="flex h-[72px] items-center gap-3 border-b border-[#E5E7EB] px-5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#16A34A] text-[11px] font-bold text-white">{conv.avatar}</div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-[#111827]">{conv.from}</p>
+              <p className="flex items-center gap-1.5 text-[11px] text-[#6B7280]"><span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" /> Online · {conv.role}</p>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-[#111827]">
-                {conv.from}
-              </p>
-              <p className="text-[11px] text-[#9CA3AF]">
-                {conv.role}
-              </p>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setCallNotice("Voice call feature coming soon")} aria-label="Voice call" title="Voice call coming soon" className="flex h-10 w-10 items-center justify-center rounded-[14px] border border-[#E5E7EB] bg-white text-[#16A34A] shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"><Phone size={17} /></button>
+              <button onClick={() => setCallNotice("Video call feature coming soon")} aria-label="Video call" title="Video call coming soon" className="flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#16A34A] text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#15803D] hover:shadow-md"><Video size={17} /></button>
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-5 space-y-3">
@@ -1841,6 +1921,7 @@ function MessagesScreen() {
           </div>
         </div>
       </div>}
+      {callNotice && <SuccessNotice message={callNotice} onClose={() => setCallNotice("")} />}
     </div>
   );
 }
@@ -1848,6 +1929,7 @@ function MessagesScreen() {
 // ── SETTINGS (shared) ─────────────────────────────────────────────────────────
 function SettingsScreen({ role }: { role: string }) {
   const [tab, setTab] = useState("profile");
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const tabs = [
     "profile",
     "security",
@@ -2050,7 +2132,7 @@ function SettingsScreen({ role }: { role: string }) {
                 <p className="text-sm font-semibold text-red-500 mb-2">
                   Danger Zone
                 </p>
-                <button className="text-sm font-medium text-red-500 border border-red-200 px-4 py-2 rounded-[8px] hover:bg-red-50 transition-colors">
+                <button onClick={() => setConfirmDelete(true)} className="text-sm font-medium text-red-500 border border-red-200 px-4 py-2 rounded-[8px] hover:bg-red-50 transition-colors">
                   Delete Account
                 </button>
               </div>
@@ -2058,6 +2140,7 @@ function SettingsScreen({ role }: { role: string }) {
           )}
         </div>
       </div>
+      <ConfirmationDialog open={confirmDelete} title="Delete your account?" description="This demo will return you to the landing page. In production, this action permanently removes account data." confirmLabel="Delete account" onCancel={() => setConfirmDelete(false)} onConfirm={() => setConfirmDelete(false)} />
     </div>
   );
 }
@@ -2299,6 +2382,7 @@ function AdoptionScreen() {
         );
   return (
     <div>
+      <Breadcrumbs items={["Applications", "My applications"]} />
       <PageTitle
         title="Adoption Applications"
         subtitle="Track your adoption journey"
@@ -2315,7 +2399,7 @@ function AdoptionScreen() {
         ))}
       </div>
       <div className="space-y-4">
-        {filtered.length === 0 ? <EmptyState title="No applications in this stage" text="Your applications will move here as shelters update their review." icon={ClipboardList} /> : filtered.map((app) => (
+        {filtered.length === 0 ? <EmptyState title="No applications in this stage" text="Your applications will move here as shelters update their review." icon={ClipboardList} action={<button onClick={() => setTab("all")} className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">View all applications</button>} /> : filtered.map((app) => (
           <div
             key={app.id}
             className="bg-white border border-[#E5E7EB] rounded-[14px] p-5"
@@ -2521,6 +2605,7 @@ function MyPetsScreen() {
 function AppointmentsScreen() {
   const [appointments, setAppointments] = useState(APPOINTMENTS);
   const [notice, setNotice] = useState("");
+  const [cancelId, setCancelId] = useState<number | null>(null);
   return (
     <div>
       <PageTitle
@@ -2532,8 +2617,8 @@ function AppointmentsScreen() {
           </button>
         }
       />
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-white border border-[#E5E7EB] rounded-[18px] overflow-x-auto">
+        <table className="min-w-[720px] w-full">
           <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB]">
             <tr>
               {[
@@ -2554,7 +2639,7 @@ function AppointmentsScreen() {
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F1F5F9]">
-            {appointments.length === 0 ? <tr><td colSpan={6} className="p-5"><EmptyState title="No appointments on your calendar" text="When you book a visit, the details and reminders will appear here." icon={Calendar} /></td></tr> : appointments.map((apt) => (
+            {appointments.length === 0 ? <tr><td colSpan={6} className="p-5"><EmptyState title="No appointments on your calendar" text="When you book a visit, the details and reminders will appear here." icon={Calendar} action={<button onClick={() => setNotice("We’ve opened the booking flow. Choose a verified veterinarian to continue.")} className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">Book appointment</button>} /></td></tr> : appointments.map((apt) => (
               <tr
                 key={apt.id}
                 className="hover:bg-[#F8FAFC] transition-colors"
@@ -2589,7 +2674,7 @@ function AppointmentsScreen() {
                       View
                     </button>
                     {apt.status !== "Completed" && (
-                      <button onClick={() => { setAppointments((items) => items.filter((item) => item.id !== apt.id)); setNotice("The appointment has been cancelled and your calendar is updated."); }} className="text-xs text-red-500 font-medium hover:underline">
+                      <button onClick={() => setCancelId(apt.id)} className="text-xs text-red-500 font-medium hover:underline">
                         Cancel
                       </button>
                     )}
@@ -2601,6 +2686,7 @@ function AppointmentsScreen() {
         </table>
       </div>
       {notice && <SuccessNotice message={notice} onClose={() => setNotice("")} />}
+      <ConfirmationDialog open={cancelId !== null} title="Cancel this appointment?" description="The appointment will be removed from your calendar. You can book another time when needed." confirmLabel="Cancel appointment" onCancel={() => setCancelId(null)} onConfirm={() => { if (cancelId !== null) setAppointments((items) => items.filter((item) => item.id !== cancelId)); setNotice("The appointment has been cancelled and your calendar is updated."); setCancelId(null); }} />
     </div>
   );
 }
@@ -2622,7 +2708,7 @@ function NotificationsScreen() {
           </button>
         }
       />
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] divide-y divide-[#F1F5F9]">
+      {notifs.length === 0 ? <EmptyState title="You’re all caught up" text="New adoption updates, reminders, and messages will appear here." icon={Bell} action={<button onClick={() => setNotifs(NOTIFICATIONS)} className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">Restore demo notifications</button>} /> : <div className="bg-white border border-[#E5E7EB] rounded-[14px] divide-y divide-[#F1F5F9]">
         {notifs.map((n) => (
           <div
             key={n.id}
@@ -2646,7 +2732,7 @@ function NotificationsScreen() {
             </div>
           </div>
         ))}
-      </div>
+      </div>}
     </div>
   );
 }
@@ -2654,6 +2740,7 @@ function NotificationsScreen() {
 function FavoritesScreen() {
   const [savedPets, setSavedPets] = useState(PETS.slice(0, 4));
   const [savedVets, setSavedVets] = useState(VETS.slice(0, 2));
+  const [removeId, setRemoveId] = useState<number | null>(null);
   return (
     <div>
       <PageTitle
@@ -2664,7 +2751,7 @@ function FavoritesScreen() {
         Saved Pets
       </h3>
       <div className="grid grid-cols-4 gap-4 mb-8">
-        {savedPets.length === 0 ? <div className="col-span-4"><EmptyState title="Your saved pets will live here" text="Save a pet while browsing to revisit them whenever you’re ready." icon={Heart} /></div> : savedPets.map((pet) => (
+        {savedPets.length === 0 ? <div className="col-span-4"><EmptyState title="Your saved pets will live here" text="Save a pet while browsing to revisit them whenever you’re ready." icon={Heart} action={<button className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">Browse pets</button>} /></div> : savedPets.map((pet) => (
           <div
             key={pet.id}
             className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden hover:shadow-sm transition-shadow"
@@ -2679,7 +2766,7 @@ function FavoritesScreen() {
                 {pet.name}
               </p>
               <p className="text-xs text-[#6B7280]">{pet.breed}</p>
-              <button onClick={() => setSavedPets((items) => items.filter((item) => item.id !== pet.id))} className="mt-2 text-[11px] font-semibold text-[#6B7280] hover:text-red-500">Remove</button>
+              <button onClick={() => setRemoveId(pet.id)} className="mt-2 text-[11px] font-semibold text-[#6B7280] hover:text-red-500">Remove</button>
             </div>
           </div>
         ))}
@@ -2688,7 +2775,7 @@ function FavoritesScreen() {
         Saved Vets
       </h3>
       <div className="space-y-3">
-        {savedVets.length === 0 ? <EmptyState title="No saved vets yet" text="Save a veterinarian to compare options and book a visit later." icon={Stethoscope} /> : savedVets.map((vet) => (
+        {savedVets.length === 0 ? <EmptyState title="No saved vets yet" text="Save a veterinarian to compare options and book a visit later." icon={Stethoscope} action={<button className="rounded-[14px] bg-[#16A34A] px-4 py-2.5 text-xs font-semibold text-white">Find a vet</button>} /> : savedVets.map((vet) => (
           <div
             key={vet.id}
             className="bg-white border border-[#E5E7EB] rounded-[14px] p-4 flex items-center gap-4"
@@ -2716,6 +2803,7 @@ function FavoritesScreen() {
           </div>
         ))}
       </div>
+      <ConfirmationDialog open={removeId !== null} title="Remove this favorite?" description="This pet will no longer appear in your saved list." confirmLabel="Remove favorite" onCancel={() => setRemoveId(null)} onConfirm={() => { if (removeId !== null) setSavedPets((items) => items.filter((item) => item.id !== removeId)); setRemoveId(null); }} />
     </div>
   );
 }
@@ -2929,7 +3017,7 @@ function ShelterDashboard({
                     <button className="text-xs font-medium text-[#16A34A] hover:underline">
                       Review
                     </button>
-                    <button className="text-xs font-medium text-red-500 hover:underline">
+                    <button onClick={() => setRejectId(app.id)} className="text-xs font-medium text-red-500 hover:underline">
                       Reject
                     </button>
                   </div>
@@ -3259,6 +3347,7 @@ function PetListingsScreen() {
 
 function ShelterApplicationsScreen() {
   const [tab, setTab] = useState("All");
+  const [rejectId, setRejectId] = useState<number | null>(null);
   const tabs = [
     "All",
     "Pending",
@@ -3287,8 +3376,8 @@ function ShelterApplicationsScreen() {
           </button>
         ))}
       </div>
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-white border border-[#E5E7EB] rounded-[18px] overflow-x-auto">
+        <table className="min-w-[720px] w-full">
           <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB]">
             <tr>
               {[
@@ -3350,6 +3439,7 @@ function ShelterApplicationsScreen() {
           </tbody>
         </table>
       </div>
+      <ConfirmationDialog open={rejectId !== null} title="Reject this application?" description="The applicant will be notified that their adoption application was not approved." confirmLabel="Reject application" onCancel={() => setRejectId(null)} onConfirm={() => setRejectId(null)} />
     </div>
   );
 }
@@ -3452,6 +3542,7 @@ function MeetGreetScreen() {
 }
 
 function CertificatesScreen() {
+  const [previewTitle, setPreviewTitle] = useState<string | null>(null);
   const certs = [
     {
       id: 1,
@@ -3470,6 +3561,7 @@ function CertificatesScreen() {
   ];
   return (
     <div>
+      <Breadcrumbs items={["Certificates", "Adoption certificates"]} />
       <PageTitle
         title="Adoption Certificates"
         subtitle="Issued certificates for completed adoptions"
@@ -3501,7 +3593,7 @@ function CertificatesScreen() {
               </p>
             </div>
             <div className="flex gap-2">
-              <button className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-[#16A34A] border border-[#16A34A] py-2 rounded-[8px] hover:bg-[#F0FDF4] transition-colors">
+              <button onClick={() => setPreviewTitle(`Adoption Certificate — ${cert.petName}`)} className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-[#16A34A] border border-[#16A34A] py-2 rounded-[8px] hover:bg-[#F0FDF4] transition-colors">
                 <Eye size={13} /> Preview
               </button>
               <button className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-[#374151] border border-[#E5E7EB] py-2 rounded-[8px] hover:bg-[#F8FAFC] transition-colors">
@@ -3522,6 +3614,7 @@ function CertificatesScreen() {
           </p>
         </div>
       </div>
+      <DocumentPreviewModal open={previewTitle !== null} title={previewTitle || "Document preview"} onClose={() => setPreviewTitle(null)} />
     </div>
   );
 }
@@ -3843,6 +3936,7 @@ function PatientRecordsScreen() {
   );
   return (
     <div>
+      {patient && <Breadcrumbs items={["Patients", patient.petName]} />}
       <PageTitle
         title="Patient Records"
         subtitle="Medical history for all patients"
@@ -3971,8 +4065,10 @@ function PatientRecordsScreen() {
 }
 
 function PrescriptionsScreen() {
+  const [previewOpen, setPreviewOpen] = useState(false);
   return (
     <div className="max-w-2xl">
+      <Breadcrumbs items={["Prescriptions", "New prescription"]} />
       <PageTitle
         title="Prescription Editor"
         subtitle="Create and issue digital prescriptions"
@@ -4062,7 +4158,7 @@ function PrescriptionsScreen() {
           />
         </div>
         <div className="flex gap-3">
-          <button className="flex-1 bg-[#16A34A] text-white text-sm font-medium py-2.5 rounded-[10px] hover:bg-[#15803D] transition-colors">
+          <button onClick={() => setPreviewOpen(true)} className="flex-1 bg-[#16A34A] text-white text-sm font-medium py-2.5 rounded-[10px] hover:bg-[#15803D] transition-colors">
             Issue Prescription
           </button>
           <button className="flex items-center gap-1.5 text-sm font-medium text-[#374151] border border-[#E5E7EB] px-4 py-2.5 rounded-[10px] hover:bg-[#F8FAFC] transition-colors">
@@ -4070,6 +4166,7 @@ function PrescriptionsScreen() {
           </button>
         </div>
       </div>
+      <DocumentPreviewModal open={previewOpen} title="Prescription — Biscuit" onClose={() => setPreviewOpen(false)} />
     </div>
   );
 }
@@ -4517,8 +4614,8 @@ function AdminAdoptionsScreen() {
           color="purple"
         />
       </div>
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-white border border-[#E5E7EB] rounded-[18px] overflow-x-auto">
+        <table className="min-w-[720px] w-full">
           <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB]">
             <tr>
               {[
@@ -4798,8 +4895,8 @@ function ModerationScreen() {
         title="Content Moderation"
         subtitle="Review reported users, listings, and messages"
       />
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-white border border-[#E5E7EB] rounded-[18px] overflow-x-auto">
+        <table className="min-w-[720px] w-full">
           <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB]">
             <tr>
               {[
@@ -4904,8 +5001,8 @@ function FeedbackScreen() {
         title="Feedback & Support"
         subtitle="User support tickets and platform feedback"
       />
-      <div className="bg-white border border-[#E5E7EB] rounded-[14px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-white border border-[#E5E7EB] rounded-[18px] overflow-x-auto">
+        <table className="min-w-[720px] w-full">
           <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB]">
             <tr>
               {[
@@ -5662,8 +5759,12 @@ export default function App() {
       return <LandingPage navigate={navigate} />;
     if (view === "login")
       return <LoginScreen navigate={navigate} />;
-    if (view === "register")
-      return <RegisterScreen navigate={navigate} />;
+    if (view === "register") return <RegisterScreen navigate={navigate} />;
+    if (view === "forgot-password") return <ForgotPasswordScreen navigate={navigate} />;
+    if (view === "reset-sent") return <ResetSentScreen navigate={navigate} />;
+    if (view === "unauthorized") return <ErrorPage code="403" title="This page is private" message="You don’t have permission to view this PawSphere area." onHome={() => navigate("landing")} />;
+    if (view === "server-error") return <ErrorPage code="500" title="A paw went sideways" message="Something unexpected happened. Please try again in a moment." onHome={() => navigate("landing")} />;
+    if (view === "not-found") return <ErrorPage code="404" title="We couldn’t find that page" message="The page may have moved, or the trail may have gone cold." onHome={() => navigate("landing")} />;
     if (view === "browse-pets-public")
       return (
         <div className="min-h-screen bg-[#F8FAFC]">
