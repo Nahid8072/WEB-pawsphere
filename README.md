@@ -379,3 +379,4 @@ Each demo role opens a different dashboard and navigation experience.
 ## License
 
 This project is currently intended for educational, prototype, and portfolio use.
+United International University uses only
