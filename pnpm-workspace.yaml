@@ -1,13 +1,17 @@
 packages:
   - '.'
 allowBuilds:
-  '@tailwindcss/oxide': set this to true or false
-  esbuild: set this to true or false
+  '@tailwindcss/oxide': true
+  esbuild: true
+  rollup: true
 supportedArchitectures:
   os:
+    - win32
     - linux
+    - darwin
   cpu:
     - x64
     - arm64
   libc:
     - glibc
+    - msvc
